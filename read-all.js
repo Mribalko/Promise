@@ -11,12 +11,18 @@ module.exports = function (path) {
             if(err) reject(err);
 
             let array = [];
+            const filesCount = files.length;
 
             files.forEach(file => {
-                let data = fs.readFileSync(file, encode);
-                array.push({name: file, content: data});
+                fs.readFile(file, encode, (err, data) => {
+                    array.push({name: file, content: data});
+
+                    if(filesCount == array.length)
+                        resolve(array);
+                });
+
             });
-            resolve(array);
+
         })
     })
 };
