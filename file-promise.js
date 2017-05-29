@@ -4,7 +4,6 @@
 const fs = require('fs');
 const encode = {encoding: 'utf8'};
 
-fs.readdir()
 
 const read = function (file) {
     return new Promise(function(resolve, reject){
