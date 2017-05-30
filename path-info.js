@@ -16,21 +16,16 @@ module.exports = function (path, callback) {
                callback(null, {path: path, type: 'file', content: data, childs: undefined });
            })
        }
-
-        else {
-           // папка
-           if (stats.isDirectory()) {
-               fs.readdir(path, (err, files) => {
-                   if (err) throw err;
-                   callback(null, {path: path, type: 'directory', content: undefined, childs: files});
-               });
-           }
-           // ни файл, ни папка
-           else {
-               callback(null, {path: path, type: undefined, content: undefined, childs: undefined});
-           }
-
+       // папка
+       else if (stats.isDirectory()) {
+           fs.readdir(path, (err, files) => {
+               if (err) throw err;
+               callback(null, {path: path, type: 'directory', content: undefined, childs: files});
+           });
        }
-
+       // ни файл, ни папка
+       else {
+           callback(null, {path: path, type: undefined, content: undefined, childs: undefined});
+       }
     });
 };

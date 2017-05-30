@@ -11,7 +11,7 @@ const read = function (file) {
             if(err) reject(err);
             resolve(data);
         })
-    })
+    });
 };
 
 const write = function (file, data) {
